@@ -1,7 +1,8 @@
 FROM node:18-alpine as build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --silent
+# Use npm install to allow builds even when a lockfile is not present
+RUN npm install --silent
 COPY . .
 RUN npm run build
 
