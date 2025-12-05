@@ -81,3 +81,17 @@ O painel vem com dados de "mentirinha" (simulação) para você ver como funcion
   ```
 
   Ajuste os valores conforme o registro que você tem acesso.
+* **Erro `KeyError: 'ContainerConfig'` ao rodar `docker-compose up`**: Esse erro acontece quando restam containers/imagens antigos com nomes iguais aos do projeto. Para limpar e recriar tudo do zero:
+
+  ```bash
+  # 1. Remova containers anteriores (ignore erros se eles não existirem)
+  docker rm -f soc-nexus-backend soc-nexus-frontend
+
+  # 2. Remova imagens antigas que possam estar corrompidas
+  docker rmi soc-nexus-project-soc-backend soc-nexus-project-soc-frontend || true
+
+  # 3. Suba novamente usando a CLI mais recente do Docker
+  docker compose up --build
+  ```
+
+  Se o seu ambiente só tiver o binário `docker-compose`, use `docker-compose up --build` no último passo. O importante é garantir que não existam containers/imagens antigos com esses nomes antes de reconstruir.
