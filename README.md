@@ -71,3 +71,13 @@ O painel vem com dados de "mentirinha" (simulação) para você ver como funcion
 * **Erro "docker não encontrado"**: Você não instalou o Docker Desktop ou não reiniciou o computador após instalar.
 * **Erro "daemon not running"**: O Docker Desktop está instalado, mas não está aberto. Abra o programa "Docker Desktop" e espere o ícone da baleia parar de se mexer.
 * **A página não carrega**: Verifique se o passo 3 completou sem erros vermelhos no terminal.
+* **Erro ao baixar imagem do Docker Hub**: As imagens base agora usam o espelho `mirror.gcr.io` para evitar bloqueios no Docker Hub. Se o seu ambiente não conseguir acessar esse espelho, você pode alterar a origem durante o build com, por exemplo:
+
+  ```bash
+  docker-compose build \
+    --build-arg PYTHON_IMAGE=python:3.9-slim \
+    --build-arg NODE_IMAGE=node:18-alpine \
+    --build-arg NGINX_IMAGE=nginx:alpine
+  ```
+
+  Ajuste os valores conforme o registro que você tem acesso.
