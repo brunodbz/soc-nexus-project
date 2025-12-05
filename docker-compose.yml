@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  soc-frontend:
+    container_name: soc-nexus-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - soc-backend
+    networks:
+      - soc-network
+
+  soc-backend:
+    container_name: soc-nexus-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ELASTIC_URL=
+      - ELASTIC_API_KEY=
+      - TENABLE_ACCESS_KEY=
+      - TENABLE_SECRET_KEY=
+      - OPENCTI_URL=
+      - OPENCTI_TOKEN=
+      - DEFENDER_TOKEN=
+    networks:
+      - soc-network
+
+networks:
+  soc-network:
+    driver: bridge
