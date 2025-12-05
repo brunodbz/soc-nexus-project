@@ -106,7 +106,7 @@ export default function SOCDashboard() {
     elastic: [],
     defender: [],
     tenable: [],
-    openCTI: [],
+    opencti: [],
     correlated: []
   });
   const [apiConfigs, setApiConfigs] = useState({});
